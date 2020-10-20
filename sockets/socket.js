@@ -1,13 +1,5 @@
 const { io } = require('../index');
-const Band = require('../models/band');
-const Bands = require('../models/bands');
 
-//Adding bands
-const bands = new Bands();
-
-bands.addBand( new Band( 'Queen' ) );
-bands.addBand( new Band( 'Bon Jovi' ) );
-bands.addBand( new Band( 'Metallica' ) );
 
 
 //Sockets Messages
@@ -24,21 +16,4 @@ io.on( 'connection', client => {
         console.log( payload );
     });
 
-    client.on('vote-band', ( payLoad ) =>{
-        console.log( payLoad );
-        bands.voteBand( payLoad.id );
-        io.emit( 'active-bands', bands.getBands() );
-    });
-
-    client.on('add-band', ( payLoad ) =>{
-      console.log( payLoad );
-      const newBand = new Band( payLoad.name );
-      bands.addBand( newBand ); 
-      io.emit( 'active-bands', bands.getBands() );
-    });
-
-    client.on('delete-band', ( payLoad ) =>{
-        console.log( payLoad );
-        io.emit( 'active-bands', bands.deleteBand( payLoad.id) ) ;
-    });
 });
