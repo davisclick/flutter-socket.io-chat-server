@@ -16,6 +16,10 @@ const UserSchema = Schema({
         type: Boolean,
         default: false
     },
+    password: {
+        type: String,
+        require: true
+    },
 });
 
 UserSchema.method('toJSON', function(){
