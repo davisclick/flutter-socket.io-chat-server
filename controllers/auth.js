@@ -91,9 +91,15 @@ const login = async ( req, res = response ) =>{
 
 const renewToken = async( req, res = response ) => {
 
+    const uid = req.uid;
+
+    const token = await generateJWT( uid );
+
+    const user = await User.findById( uid );
     res.json({
         ok:true,
-        msg: req.uid
+        user,
+        token
     });
 }
 
