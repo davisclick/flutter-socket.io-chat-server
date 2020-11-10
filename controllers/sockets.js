@@ -1,6 +1,6 @@
 const User = require('../models/user');
 
-const userLogged = ( uid = '' ) =>{
+const userLogged = async ( uid = '' ) =>{
 
     const user = await User.findById( uid );
     user.online = true;
@@ -9,9 +9,9 @@ const userLogged = ( uid = '' ) =>{
     return user;
 }
 
-const userDisconnected = ( uid = '' ) =>{
+const userDisconnected = async ( uid = '' ) =>{
 
-    const user = await User.findById( uis );
+    const user = await User.findById( uid );
     user.online = false;
 
     await user.save();

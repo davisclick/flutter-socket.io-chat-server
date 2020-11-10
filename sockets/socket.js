@@ -1,5 +1,6 @@
 const { io } = require('../index');
 const { validJWT } = require('../helpers/jwt');
+const {  userLogged,userDisconnected } = require('../controllers/sockets');
 
 
 
@@ -12,8 +13,10 @@ io.on( 'connection', client => {
         return client.disconnect();
     }
 
+    userLogged( uid );
+    
     client.on('disconnect', () => { 
-        console.log( 'Client disconnected' );
+        userDisconnected( uid ); 
     });
 
     client.on('flutter-message', ( payload ) => { 
