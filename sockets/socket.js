@@ -2,8 +2,6 @@ const { io } = require('../index');
 const { validJWT } = require('../helpers/jwt');
 const {  userLogged,userDisconnected } = require('../controllers/sockets');
 
-
-
 //Sockets Messages
 io.on( 'connection', client => {
     console.log( 'Client connected' );
@@ -14,6 +12,13 @@ io.on( 'connection', client => {
     }
 
     userLogged( uid );
+
+    client.join( uid );
+
+    //client.to( uid ).emit('');
+    client.on('personal-message', ( payload ) => {
+        console.log(payload);
+    });
     
     client.on('disconnect', () => { 
         userDisconnected( uid ); 
