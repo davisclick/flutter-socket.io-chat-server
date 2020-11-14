@@ -15,10 +15,8 @@ io.on( 'connection', client => {
 
     client.join( uid );
 
-    //client.to( uid ).emit('');
     client.on('personal-message', ( payload ) => {
         console.log(payload);
-
         io.to( payload.to ).emit( 'personal-message', payload );
     });
     
