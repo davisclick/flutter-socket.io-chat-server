@@ -23,9 +23,4 @@ io.on( 'connection', client => {
     client.on('disconnect', () => { 
         userDisconnected( uid ); 
     });
-
-    client.on('flutter-message', ( payload ) => { 
-        console.log( payload );
-    });
-
 });
